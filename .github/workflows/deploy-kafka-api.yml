@@ -7,9 +7,8 @@ on:
       - main
 
     paths:
-      - '../docker-compos.yml'
-      - '../mascotas-kafka/*'
-      - './'
+      - 'docker-compos.yml'
+      - 'mascotas-kafka/*'
 
 jobs:
   deploy-lambda:
