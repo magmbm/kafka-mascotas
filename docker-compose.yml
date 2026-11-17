@@ -1,8 +1,3 @@
-# Stack completo del proyecto final: 4 servicios + Kafka (KRaft) + Kafka UI.
-# Despliegue: ver scripts/deploy.sh y README.md
-#
-# Puertos públicos: 8080 (api), 8081-8083 (consumers), 8084 (kafka-ui)
-# Kafka 9092 queda interno a la red de docker (los servicios se conectan como kafka:9092)
 
 name: mascotas-kafka
 

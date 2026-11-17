@@ -7,7 +7,7 @@ on:
       - main
 
     paths:
-      - '../*'
+      - '../mascotas-kafka/*'
 
 jobs:
   deploy-lambda:
