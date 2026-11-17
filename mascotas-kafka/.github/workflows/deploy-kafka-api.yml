@@ -1,0 +1,39 @@
+name: Deploy API Kafka
+
+on:
+  push:
+    branches:
+      - proyecto-clon
+      - main
+
+    paths:
+      - '../*'
+
+jobs:
+  deploy-lambda:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Desplegar a AWS Lambda
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }} # Obligatorio para AWS Learner Lab
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION || 'us-east-1' }} # Cambia a 'us-east-2' si tu Lambda fue creada en Ohio
+        run: |
+          aws lambda update-function-code \
+            --function-name crud_mascotas \
+            --zip-file fileb://function.zip \
+            --region "$AWS_DEFAULT_REGION"
+
+          aws lambda wait function-updated \
+            --function-name crud_mascotas \
+            --region "$AWS_DEFAULT_REGION"
+
+          aws lambda update-function-configuration \
+            --function-name crud_mascotas \
+            --handler crud_mascota.handler \
+            --region "$AWS_DEFAULT_REGION"
