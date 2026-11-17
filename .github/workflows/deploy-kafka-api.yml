@@ -7,7 +7,7 @@ on:
       - main
 
     paths:
-      - 'docker-compos.yml'
+      - 'docker-compose.yml'
       - 'mascotas-kafka/*'
 
 jobs:
